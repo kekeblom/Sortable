@@ -97,6 +97,10 @@
 						_activeComponent = this;
 					}
 					else if (name === 'onAdd' || name === 'onUpdate') {
+						if (_nextSibling && _nextSibling.style.opacity !== '') {
+							// Safari bug. _nextSibling is referencing a ghost when the last element is dragged.
+							_nextSibling = null;
+						}
 						evt.from.insertBefore(evt.item, _nextSibling);
 
 						var newState = {},
